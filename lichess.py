@@ -94,7 +94,7 @@ class Lichess():
 
     def get_profile(self):
         profile = self.api_get(ENDPOINTS["profile"])
-        self.set_user_agent(profile["username"])
+        self.set_user_agent(profile["id"])
         return profile
 
     def get_ongoing_games(self):
@@ -104,6 +104,6 @@ class Lichess():
     def resign(self, game_id):
         self.api_post(ENDPOINTS["resign"].format(game_id))
 
-    def set_user_agent(self, username):
-        self.header.update({"User-Agent": "lichess-bot/{} user:{}".format(self.version, username)})
+    def set_user_agent(self, userid):
+        self.header.update({"User-Agent": "lichess-bot/{} user:{}".format(self.version, userid)})
         self.session.headers.update(self.header)
